@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8097d206bd2384c86f598d249610ec, type: 3}
+  m_Name: Metal - Aluminium
+  m_EditorClassIdentifier: 
+  objectName: Aluminium
+  objectType: 0
+  prefab: {fileID: 4063733870881742619, guid: 1ec8723b7734dc94b88c988aa4b6bbc2, type: 3}
+  sprite: {fileID: 21300000, guid: 711517043e3befd4782addb858f5f1ca, type: 3}
