@@ -28,8 +28,8 @@ public class ResourceGen : BaseContraption
         if (!player.HasWorkshopObject())
         {
             // player is not holding an object
-            Transform resourceObjectTransform = Instantiate(resourceObjectSo.prefab);
-            resourceObjectTransform.GetComponent<WorkshopObject>().SetWorkshopObjectParent(this);
+            //Transform resourceObjectTransform = Instantiate(resourceObject.prefab);
+            //resourceObjectTransform.GetComponent<WorkshopObject>().SetWorkshopObjectParent(this);
         }
     }
     

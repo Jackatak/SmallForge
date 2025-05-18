@@ -152,18 +152,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2848036685597876612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ceb9a8bd827554aa2c3d317ca29575, type: 3}
+  m_Script: {fileID: 11500000, guid: 48d8c8a693c1d77469a4ef36aa839fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceHoldPoint: {fileID: 4509162679950742487}
-  resourceObjectSo: {fileID: 11400000, guid: ca87c51fbba804346a8aa89e1ffd16b8, type: 2}
+  resourceHoldPoint: {fileID: 7805912326927183136}
+  resourceChances: []
   nextConvayor: {fileID: 0}
---- !u!4 &4509162679950742487 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7087994875284996958, guid: db60cf4f8c9e7ff41a7f775a7d7cb9ad,
-    type: 3}
-  m_PrefabInstance: {fileID: 6687386229208469641}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7772811197495839435
 PrefabInstance:
   m_ObjectHideFlags: 0

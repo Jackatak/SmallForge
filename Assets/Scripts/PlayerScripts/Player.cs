@@ -146,9 +146,9 @@ public class Player : MonoBehaviour, IWorkshopObjectParent
         isStill = gameInputs.OnActionStill();
         
         if (isGrounded)
-            rb.drag = groundDrag;
+            rb.linearDamping = groundDrag;
         else
-            rb.drag = 0;
+            rb.linearDamping = 0;
         
         if (dashCooldownTimer > 0)
         {
@@ -256,7 +256,7 @@ public class Player : MonoBehaviour, IWorkshopObjectParent
             rb.AddForce(GetSlopeMoveDirection().normalized * (moveSpeed * slopeMultiplier), ForceMode.Force); // Apply force based on slope direction
 
             // If moving upward on a slope, apply additional downward force
-            if (rb.velocity.y > 0)
+            if (rb.linearVelocity.y > 0)
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force); // Apply downward force to stick to the slope
         }
         else
@@ -274,17 +274,17 @@ public class Player : MonoBehaviour, IWorkshopObjectParent
         if (OnSlope() && !exitingSlope)
         {
             // If moving too fast, limit the velocity
-            if (rb.velocity.magnitude > walkSpeed)
-                rb.velocity = rb.velocity.normalized * walkSpeed; // Limit the velocity to the move speed
+            if (rb.linearVelocity.magnitude > walkSpeed)
+                rb.linearVelocity = rb.linearVelocity.normalized * walkSpeed; // Limit the velocity to the move speed
         }
         else 
         {
-            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Get the horizontal velocity
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // Get the horizontal velocity
             // If moving too fast, limit the velocity
             if (flatVel.magnitude > walkSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * walkSpeed; // Limit the velocity to the move speed
-                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z); // Update the velocity
+                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z); // Update the velocity
             }
         }
     }
@@ -325,12 +325,12 @@ public class Player : MonoBehaviour, IWorkshopObjectParent
             readyToJump = false; // Set the flag to false
             if(isStill)
             {
-                rb.velocity = new Vector3(rb.velocity.x * 0.6f, 0, rb.velocity.z * 0.6f); // Reset the vertical velocity
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x * 0.6f, 0, rb.linearVelocity.z * 0.6f); // Reset the vertical velocity
                 rb.AddForce(transform.up * jumpForce, ForceMode.Impulse); // Apply an impulse force upwards
             }
             else
             {
-                rb.velocity = new Vector3(rb.velocity.x * 0.3f, 0, rb.velocity.z * 0.3f); // Reset the vertical velocity
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x * 0.3f, 0, rb.linearVelocity.z * 0.3f); // Reset the vertical velocity
                 rb.AddForce(transform.up * leapForce, ForceMode.Impulse); // Apply an impulse force upwards
             }
             Invoke(nameof(JumpReset), jumpCooldown); // Call the JumpReset method after the cooldown
@@ -356,7 +356,7 @@ public class Player : MonoBehaviour, IWorkshopObjectParent
         // Perform the slam action
         isSlamming = true;
         // Freezes player movement and physics
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.isKinematic = true;
         
         yield return new WaitForSeconds(freezeDuration); // Wait for the specified freeze duration
@@ -386,11 +386,11 @@ public class Player : MonoBehaviour, IWorkshopObjectParent
 
         while (Time.time < startTime + dashDuration)
         {
-            rb.velocity = dashDirection * dashSpeed;
+            rb.linearVelocity = dashDirection * dashSpeed;
             yield return null;
         }
 
-        rb.velocity = Vector3.zero; // Optional: Stop the player completely after dashing
+        rb.linearVelocity = Vector3.zero; // Optional: Stop the player completely after dashing
         isDashing = false;
         dashCooldownTimer = dashCooldown;
     }
