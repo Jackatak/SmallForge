@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Metal - Manganese
   m_EditorClassIdentifier: 
   objectName: Manganese
+  objectID: 
   objectType: 0
-  prefab: {fileID: 3873988854925249359, guid: 055c11e0d5210604ea8733695d0c3941, type: 3}
+  prefab: {fileID: 7767880628815406531, guid: 055c11e0d5210604ea8733695d0c3941, type: 3}
   sprite: {fileID: 21300000, guid: 272c2a1ee469f914d883837963fc65c0, type: 3}
+  spawnWeight: 1

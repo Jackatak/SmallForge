@@ -102,4 +102,10 @@ public class WorkshopObject : MonoBehaviour, IWorkshopObjectParent
     {
         canBePickedUp = value;
     }
+    
+    public ResourceObjectSO GetResourceData()
+    {
+        return resourceObjectSo;
+    }
+
 }

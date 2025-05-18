@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Scrap - Cogs and Poles
   m_EditorClassIdentifier: 
   objectName: Cogs and Poles
+  objectID: 
   objectType: 1
-  prefab: {fileID: 5867925370297114604, guid: be96b826be4e024458f6656658514fd3, type: 3}
+  prefab: {fileID: 4341403611667786822, guid: be96b826be4e024458f6656658514fd3, type: 3}
   sprite: {fileID: 21300000, guid: 6474352d85c332e418f74af74ed1d4c1, type: 3}
-  spawnWeight: 30
+  spawnWeight: 0.3

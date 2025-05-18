@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Scrap - Box
   m_EditorClassIdentifier: 
   objectName: Box
+  objectID: 
   objectType: 1
-  prefab: {fileID: 3181769219171489173, guid: de18795afe214d24ab10b1b573bcbd2d, type: 3}
+  prefab: {fileID: 1022887848871290410, guid: de18795afe214d24ab10b1b573bcbd2d, type: 3}
   sprite: {fileID: 21300000, guid: 42f3bcd7258c5924ba1b1bec4b49eaed, type: 3}
-  spawnWeight: 30
+  spawnWeight: 0.3

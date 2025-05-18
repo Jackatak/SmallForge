@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Metal - Copper
   m_EditorClassIdentifier: 
   objectName: Copper
+  objectID: 
   objectType: 0
-  prefab: {fileID: 6738734577360167817, guid: aa9086fb9778bf54f8ec9897fd475875, type: 3}
+  prefab: {fileID: 1076801153019716106, guid: aa9086fb9778bf54f8ec9897fd475875, type: 3}
   sprite: {fileID: 21300000, guid: 25f53ecd251ec514b81baf7efd67db08, type: 3}
+  spawnWeight: 1

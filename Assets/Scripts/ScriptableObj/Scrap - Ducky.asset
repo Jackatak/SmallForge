@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Scrap - Ducky
   m_EditorClassIdentifier: 
   objectName: Ducky
+  objectID: 
   objectType: 1
-  prefab: {fileID: 3609997477857569874, guid: 1385106fb06faa2459ba365501052396, type: 3}
+  prefab: {fileID: 890036091132822086, guid: 1385106fb06faa2459ba365501052396, type: 3}
   sprite: {fileID: 21300000, guid: 43836b7ce143e294db6be8f92f8507ee, type: 3}
-  spawnWeight: 1
+  spawnWeight: 0.1

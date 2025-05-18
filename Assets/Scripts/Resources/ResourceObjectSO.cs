@@ -13,10 +13,18 @@ public class ResourceObjectSO : ScriptableObject
         Tool
     }
     public string objectName;
+    public string objectID;
     public ObjectType objectType; 
     public GameObject prefab;
     public Sprite sprite;
     [Tooltip("Scrap spawn weight (for resources its 1)")]
     [Range(0, 1)]
     public float spawnWeight = 1;
+    
+    
+    public string GetID()
+    {
+        return objectID;
+    }
+
 }
