@@ -496,7 +496,7 @@ public class Player : MonoBehaviour, IWorkshopObjectParent
                 objCol.enabled = true;
             }
 
-            obj.gameObject.layer = LayerMask.NameToLayer("Interactable");
+            obj.gameObject.layer = LayerMask.NameToLayer("Resource");
 
             obj.SetCanBePickedUp(false);
             StartCoroutine(ReenablePickup(obj, 0.5f));
