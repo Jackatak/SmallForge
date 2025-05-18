@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu()]
+
+[CreateAssetMenu(menuName = "SmallForge/SObj/ResourceObjectSO")]
 public class ResourceObjectSO : ScriptableObject
 {
     public enum ObjectType
@@ -13,6 +14,9 @@ public class ResourceObjectSO : ScriptableObject
     }
     public string objectName;
     public ObjectType objectType; 
-    public Transform prefab;
+    public GameObject prefab;
     public Sprite sprite;
+    [Tooltip("Scrap spawn weight (for resources its 1)")]
+    [Range(0, 1)]
+    public float spawnWeight = 1;
 }

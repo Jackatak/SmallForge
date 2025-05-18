@@ -11,7 +11,7 @@ public class ContainorGen : BaseContraption
         if (!player.HasWorkshopObject())
         {
             // player is not holding an object
-            Transform resourceObjectTransform = Instantiate(resourceObjectSo.prefab);
+            GameObject resourceObjectTransform = Instantiate(resourceObjectSo.prefab);
             resourceObjectTransform.GetComponent<WorkshopObject>().SetWorkshopObjectParent(player);
         }
 

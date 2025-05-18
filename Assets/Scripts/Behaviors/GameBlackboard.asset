@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
+  m_Name: GameBlackboard
+  m_EditorClassIdentifier: 
+  AssetID:
+    m_Value0: 2647270569706371919
+    m_Value1: 1950110385892962634
+  m_Variables:
+  - rid: 4159081271186161974
+  - rid: 4159081271186161976
+  - rid: 4159081271186161978
+  - rid: 4159081271186161980
+  m_VersionTimestamp: 638831746720500121
+  m_CommandBuffer:
+    m_Commands: []
+  m_RuntimeBlackboardAsset: {fileID: 5206804814356376083}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4159081271186161974
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework,
+        asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 8990372285404647003
+          m_Value1: 13574525332009261214
+        Name: roundTimeElapsed
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 4159081271186161976
+      type: {class: 'TypedVariableModel`1[[System.Int32, mscorlib]]', ns: Unity.Behavior.GraphFramework,
+        asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 11595497498296915712
+          m_Value1: 4638972628574989945
+        Name: roundNumber
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 4159081271186161978
+      type: {class: 'TypedVariableModel`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior.GraphFramework,
+        asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 2916995110984854457
+          m_Value1: 5312208680646640382
+        Name: productionActive
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 4159081271186161980
+      type: {class: 'TypedVariableModel`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior.GraphFramework,
+        asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 11031023521580774971
+          m_Value1: 5098714404627585095
+        Name: scrapOnlyMode
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+--- !u!114 &5206804814356376083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
+  m_Name: GameBlackboard
+  m_EditorClassIdentifier: 
+  VersionTimestamp: 638831746720500121
+  AssetID:
+    m_Value0: 2647270569706371919
+    m_Value1: 1950110385892962634
+  m_Blackboard:
+    m_Variables:
+    - rid: 4159081271186161975
+    - rid: 4159081271186161977
+    - rid: 4159081271186161979
+    - rid: 4159081271186161981
+  m_SharedBlackboardVariableGuids: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4159081271186161975
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
+        asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 8990372285404647003
+          m_Value1: 13574525332009261214
+        Name: roundTimeElapsed
+        m_Value: 0
+    - rid: 4159081271186161977
+      type: {class: 'BlackboardVariable`1[[System.Int32, mscorlib]]', ns: Unity.Behavior,
+        asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 11595497498296915712
+          m_Value1: 4638972628574989945
+        Name: roundNumber
+        m_Value: 0
+    - rid: 4159081271186161979
+      type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior,
+        asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 2916995110984854457
+          m_Value1: 5312208680646640382
+        Name: productionActive
+        m_Value: 0
+    - rid: 4159081271186161981
+      type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior,
+        asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 11031023521580774971
+          m_Value1: 5098714404627585095
+        Name: scrapOnlyMode
+        m_Value: 0

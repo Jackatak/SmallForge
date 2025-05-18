@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.79
       objectReference: {fileID: 0}
+    - target: {fileID: 8362920912946470193, guid: db60cf4f8c9e7ff41a7f775a7d7cb9ad,
+        type: 3}
+      propertyPath: m_Name
+      value: ItemSpawn
+      objectReference: {fileID: 0}
     - target: {fileID: 8883381183176044813, guid: db60cf4f8c9e7ff41a7f775a7d7cb9ad,
         type: 3}
       propertyPath: m_Name
@@ -156,8 +161,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceHoldPoint: {fileID: 7805912326927183136}
-  resourceChances: []
   nextConvayor: {fileID: 0}
+  spawnPoint: {fileID: 4509162679950742487}
+  recipeManager: {fileID: 0}
+  allResources:
+  - {fileID: 11400000, guid: 2e6f555cc8e61804e852c598e211ec3a, type: 2}
+  - {fileID: 11400000, guid: 4f0973a85a5376f40ae2a5510ae313d8, type: 2}
+  - {fileID: 11400000, guid: e812f967c4df37847a7d4682ff1ae6fd, type: 2}
+  - {fileID: 11400000, guid: 940e13a1a974c4c44b3795227a3aba60, type: 2}
+  - {fileID: 11400000, guid: 0a4aca26f341e364ca963963515f19f6, type: 2}
+  - {fileID: 11400000, guid: 41f64502bdb19ea46b2d5223a5f620af, type: 2}
+  - {fileID: 11400000, guid: a101a074154ab99489d9575628339293, type: 2}
+  - {fileID: 11400000, guid: 8cd8ff9f081c8cb4a885b7a3704cfde4, type: 2}
+  - {fileID: 11400000, guid: ca87c51fbba804346a8aa89e1ffd16b8, type: 2}
+  spawnRate: 1
+  autoStart: 0
+  graphRunner: {fileID: 0}
+  scrapFlagKey: scrapOnlyMode
+--- !u!4 &4509162679950742487 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7087994875284996958, guid: db60cf4f8c9e7ff41a7f775a7d7cb9ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 6687386229208469641}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7772811197495839435
 PrefabInstance:
   m_ObjectHideFlags: 0

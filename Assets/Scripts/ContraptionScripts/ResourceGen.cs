@@ -1,42 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Behavior;
 
 public class ResourceGen : BaseContraption
 {
-    // custom class to hold resource and chance
-    [System.Serializable]
-    public class ResourceChancePair
-    {
-        public ResourceObjectSO resource;
-        [Range(0f, 1f)]
-        public float chance;
-    }
-    
-    [SerializeField] private ResourceChancePair[] resourceChances;
-    
-    
+    [Header("Convayor Functionality")]
     [SerializeField] private Convayor nextConvayor;
-    
-    public static float moveSpeed = 1.0f; // Global movement time
-    public static bool stop = false; // Global stop variable
-
+    public static float moveSpeed = 1.0f;
+    public static bool stop = false;
     private bool isMoving = false;
-    
+
+    [Header("Resource Generation")]
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private RecipeManager recipeManager;
+    [SerializeField] private List<ResourceObjectSO> allResources;
+    [SerializeField] private float spawnRate = 1f;
+    [SerializeField] private bool autoStart = false;
+
+    [SerializeField] private BehaviorGraphAgent graphRunner;
+    [SerializeField] private string scrapFlagKey = "scrapOnlyMode";
+
+    private List<ResourceObjectSO> scrapResources;
+    private Coroutine productionCoroutine;
+    private bool isProducing = false;
+
+    private RoundRecipe CurrentRound => recipeManager.CurrentRound;
+
     public override void Interact(Player player)
     {
-        if (!player.HasWorkshopObject())
-        {
-            // player is not holding an object
-            //Transform resourceObjectTransform = Instantiate(resourceObject.prefab);
-            //resourceObjectTransform.GetComponent<WorkshopObject>().SetWorkshopObjectParent(this);
-        }
+        if (isProducing)
+            StopProduction();
+        else
+            StartProduction();
     }
-    
+
     private void Start()
     {
+        if (autoStart) StartProduction();
+        scrapResources = allResources.FindAll(r => r.objectType == ResourceObjectSO.ObjectType.Scrap);
         StartCoroutine(ConveyorLoop());
     }
+
     private IEnumerator ConveyorLoop()
     {
         while (true)
@@ -53,6 +58,7 @@ public class ResourceGen : BaseContraption
             StartCoroutine(MoveItem(item, nextConvayor));
         }
     }
+
     private IEnumerator MoveItem(WorkshopObject item, BaseContraption target)
     {
         Transform start = item.transform;
@@ -76,10 +82,10 @@ public class ResourceGen : BaseContraption
         item.SetWorkshopObjectParent(target);
         isMoving = false;
 
-        // Try push next
         if (nextConvayor != null)
             nextConvayor.TryPush();
     }
+
     public void TryPush()
     {
         if (stop || isMoving || !HasWorkshopObject() || nextConvayor == null || nextConvayor.HasWorkshopObject())
@@ -91,4 +97,92 @@ public class ResourceGen : BaseContraption
         isMoving = true;
         StartCoroutine(MoveItem(item, nextConvayor));
     }
+
+    private void StartProduction()
+    {
+        isProducing = true;
+        productionCoroutine = StartCoroutine(ProduceLoop());
+    }
+
+    private void StopProduction()
+    {
+        isProducing = false;
+        if (productionCoroutine != null)
+        {
+            StopCoroutine(productionCoroutine);
+            productionCoroutine = null;
+        }
+    }
+
+    private IEnumerator ProduceLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnRate);
+
+            GameObject instance;
+
+            bool spawnScrap = graphRunner.GetVariable(scrapFlagKey, out BlackboardVariable _);
+
+            if (spawnScrap)
+            {
+                instance = Instantiate(SelectScrapPrefab(), spawnPoint.position, Quaternion.identity);
+            }
+            else
+            {
+                ResourceObjectSO metal = SelectMetalWeighted();
+                instance = Instantiate(
+                    (metal != null && metal.prefab != null) ? metal.prefab : SelectScrapPrefab(),
+                    spawnPoint.position,
+                    Quaternion.identity
+                );
+            }
+
+            WorkshopObject workshopObject = instance.GetComponent<WorkshopObject>();
+            if (workshopObject != null)
+            {
+                workshopObject.SetWorkshopObjectParent(this);
+            }
+        }
+    }
+
+    private GameObject SelectScrapPrefab()
+    {
+        List<GameObject> weightedPool = new List<GameObject>();
+
+        foreach (var scrap in scrapResources)
+        {
+            for (int i = 0; i < scrap.spawnWeight; i++)
+            {
+                weightedPool.Add(scrap.prefab);
+            }
+        }
+
+        if (weightedPool.Count == 0)
+            return null;
+
+        return weightedPool[Random.Range(0, weightedPool.Count)];
+    }
+
+    private ResourceObjectSO SelectMetalWeighted()
+    {
+        List<ResourceObjectSO> pool = new List<ResourceObjectSO>();
+
+        foreach (var metal in CurrentRound.metalsThisRound)
+        {
+            for (int i = 0; i < metal.amount; i++)
+            {
+                pool.Add(metal.metal);
+            }
+        }
+
+        if (pool.Count == 0) return null;
+        return pool[Random.Range(0, pool.Count)];
+    }
+    
+    public override Transform GetWorkshopObjectTransform()
+    {
+        return spawnPoint;
+    }
+
 }
