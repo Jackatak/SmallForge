@@ -36,9 +36,7 @@ public class ResourceVisuals : MonoBehaviour
 
     private void Hide()
     {
-        foreach (GameObject visual in visualGameObjectArray)
-        {
-            visual.SetActive(false);
-        }
+        if (!this || !gameObject || gameObject.Equals(null)) return;
+        gameObject.SetActive(false);
     }
 }

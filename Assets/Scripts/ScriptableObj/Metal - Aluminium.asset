@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Metal - Aluminium
   m_EditorClassIdentifier: 
   objectName: Aluminium
-  objectID: 
+  objectID: Al
   objectType: 0
   prefab: {fileID: 6604925009969660117, guid: 1ec8723b7734dc94b88c988aa4b6bbc2, type: 3}
   sprite: {fileID: 21300000, guid: 711517043e3befd4782addb858f5f1ca, type: 3}

@@ -122,20 +122,40 @@ public class ResourceGen : BaseContraption
 
             GameObject instance;
 
-            bool spawnScrap = graphRunner.GetVariable(scrapFlagKey, out BlackboardVariable _);
+            bool scrapOnly  = !graphRunner.GetVariable(scrapFlagKey, out BlackboardVariable _);
+            
+            Debug.Log("Spawn scrap: " + scrapOnly);
+            bool spawnScrap;
+
+            if (scrapOnly)
+            {
+                spawnScrap = true;
+            }
+            else
+            {
+                // 50% chance to spawn scrap even in mixed mode
+                spawnScrap = Random.value < 0.5f;
+            }
 
             if (spawnScrap)
             {
-                instance = Instantiate(SelectScrapPrefab(), spawnPoint.position, Quaternion.identity);
+                GameObject scrapPrefab = SelectScrapPrefab();
+                if (scrapPrefab == null)
+                {
+                    Debug.LogWarning("⚠️ No scrap prefab available.");
+                    continue;
+                }
+                instance = Instantiate(scrapPrefab, spawnPoint.position, Quaternion.identity);
             }
             else
             {
                 ResourceObjectSO metal = SelectMetalWeighted();
-                instance = Instantiate(
-                    (metal != null && metal.prefab != null) ? metal.prefab : SelectScrapPrefab(),
-                    spawnPoint.position,
-                    Quaternion.identity
-                );
+                if (metal == null || metal.prefab == null)
+                {
+                    Debug.LogWarning("⚠️ No valid metal prefab found.");
+                    continue;
+                }
+                instance = Instantiate(metal.prefab, spawnPoint.position, Quaternion.identity);
             }
 
             WorkshopObject workshopObject = instance.GetComponent<WorkshopObject>();
@@ -145,6 +165,8 @@ public class ResourceGen : BaseContraption
             }
         }
     }
+
+
 
     private GameObject SelectScrapPrefab()
     {
@@ -166,7 +188,7 @@ public class ResourceGen : BaseContraption
 
     private ResourceObjectSO SelectMetalWeighted()
     {
-        List<ResourceObjectSO> pool = new List<ResourceObjectSO>();
+        List<ResourceObjectSO> pool = new();
 
         foreach (var metal in CurrentRound.metalsThisRound)
         {
