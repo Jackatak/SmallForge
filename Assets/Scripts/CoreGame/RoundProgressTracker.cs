@@ -5,17 +5,15 @@ public class RoundProgressTracker : MonoBehaviour
 {
     [SerializeField] private RecipeManager recipeManager;
 
-    private Dictionary<ResourceObjectSO, int> submitted = new Dictionary<ResourceObjectSO, int>();
+    private readonly Dictionary<string, int> submitted = new();
 
     public void RecordSubmission(ResourceObjectSO metal)
     {
-        if (!submitted.ContainsKey(metal))
-            submitted[metal] = 0;
-
-        submitted[metal]++;
-
-        CheckRoundCompletion();
+        string id = metal.GetID();
+        submitted.TryAdd(id, 0);
+        submitted[id]++;
     }
+
 
     private void CheckRoundCompletion()
     {
@@ -23,7 +21,7 @@ public class RoundProgressTracker : MonoBehaviour
 
         foreach (var req in recipeManager.CurrentRound.metalsThisRound)
         {
-            submitted.TryGetValue(req.metal, out int submittedCount);
+            submitted.TryGetValue(req.metal.GetID(), out int submittedCount);
             if (submittedCount < req.amount)
             {
                 complete = false;
@@ -38,6 +36,7 @@ public class RoundProgressTracker : MonoBehaviour
         }
     }
 
+
     public float GetProgressPercent()
     {
         float totalRequired = 0;
@@ -46,10 +45,22 @@ public class RoundProgressTracker : MonoBehaviour
         foreach (var req in recipeManager.CurrentRound.metalsThisRound)
         {
             totalRequired += req.amount;
-            submitted.TryGetValue(req.metal, out int submittedCount);
+            submitted.TryGetValue(req.metal.GetID(), out int submittedCount);
             totalSubmitted += Mathf.Min(submittedCount, req.amount);
         }
 
         return totalRequired == 0 ? 0 : (totalSubmitted / totalRequired) * 100f;
     }
+
+    
+    public int GetSubmittedCount(string id)
+    {
+        if (submitted.TryGetValue(id, out int count))
+        {
+            return count;
+        }
+        return 0;
+    }
+
+    
 }
